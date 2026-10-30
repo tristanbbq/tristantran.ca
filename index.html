@@ -147,6 +147,18 @@
   }
   .bio .role, .bio .soft { display: block; }
   .bio .soft { color: var(--muted); }
+  /* Rotating role line: items share one grid cell so the line keeps the
+     height of the longest item and nothing below it jumps. */
+  .js .bio .role { display: grid; }
+  .bio .item {
+    grid-area: 1 / 1;
+    align-self: end;
+    opacity: 0;
+    transform: translateY(0.5em);
+    transition: opacity .45s ease, transform .6s cubic-bezier(.2,.7,.1,1);
+  }
+  .bio .item.on { opacity: 1; transform: none; }
+  .bio .item.off { transform: translateY(-0.5em); }
   @media (min-width: 640px) { .bio .role { white-space: nowrap; } }
   .bio a.co {
     color: inherit;
@@ -216,9 +228,8 @@
     </h1>
     <div class="about">
       <img class="avatar" src="/images/tristan.webp" width="128" height="128" alt="Photo of Tristan Tran" decoding="async">
-      <p class="bio" data-en="<span class='role'>Principal Software {role} at <a class='co' href='https://www.upgrade.com' target='_blank' rel='noopener'>Upgrade</a>.</span> <span class='soft'>Based in Montreal 🇨🇦</span>"
-                     data-fr="<span class='role'>{role} logiciel principal chez <a class='co' href='https://www.upgrade.com' target='_blank' rel='noopener'>Upgrade</a>.</span> <span class='soft'>Basé à Montréal 🇨🇦</span>">
-        <span class="role">Principal Software Developer at <a class="co" href="https://www.upgrade.com" target="_blank" rel="noopener">Upgrade</a>.</span> <span class="soft">Based in Montreal 🇨🇦</span>
+      <p class="bio">
+        <span class="role">Principal Software Developer at <a class="co" href="https://www.upgrade.com" target="_blank" rel="noopener">Upgrade</a></span> <span class="soft">Based in Montreal 🇨🇦</span>
       </p>
     </div>
   </main>
@@ -254,10 +265,33 @@
     };
     var title = 'dev';
 
+    // Role line rotates through these; ms is how long each stays on screen.
+    var upgrade = '<a class="co" href="https://www.upgrade.com" target="_blank" rel="noopener">Upgrade</a>';
+    var roles = [
+      { ms: 7000, en: 'Principal Software {title} at ' + upgrade, fr: '{title} logiciel principal chez ' + upgrade },
+      { ms: 2500, en: 'Technology enthusiast 💻', fr: 'Passionné de technologie 💻' },
+      { ms: 2500, en: 'Father of three 👫', fr: 'Père de trois enfants 👫' },
+      { ms: 2500, en: 'Runner 🏃', fr: 'Coureur 🏃' },
+      { ms: 2500, en: 'Pickleball player 🏓', fr: 'Joueur de pickleball 🏓' },
+      { ms: 2500, en: 'Dog dad of Pérou 🐕', fr: 'Papa de Pérou, mon chien 🐕' },
+      { ms: 2500, en: 'Traveler 🌏', fr: 'Voyageur 🌏' },
+      { ms: 2500, en: 'Cyclist 🚲', fr: 'Cycliste 🚲' },
+      { ms: 2500, en: 'Urban explorer 🏙️', fr: 'Explorateur urbain 🏙️' },
+      { ms: 4000, en: 'Habs fan 🏒', fr: 'Habs fan 🏒' }
+    ];
+    var current = 0;
+    var roleEl = bio.querySelector('.role');
+    var softEl = bio.querySelector('.soft');
+
     function apply(l) {
       lang = l;
       document.documentElement.lang = l;
-      bio.innerHTML = bio.getAttribute('data-' + l).replace('{role}', titles[title][l]);
+      roleEl.innerHTML = roles.map(function (r, i) {
+        var on = i === current;
+        return '<span class="item' + (on ? ' on' : '') + '"' + (on ? '' : ' inert') + '>' +
+          r[l].replace('{title}', titles[title][l]) + '</span>';
+      }).join('');
+      softEl.textContent = l === 'fr' ? 'Basé à Montréal 🇨🇦' : 'Based in Montreal 🇨🇦';
       document.getElementById('city').textContent = l === 'fr' ? 'Montréal' : 'Montreal';
       btn.textContent = l === 'en' ? 'FR' : 'EN';
       btn.setAttribute('aria-label', l === 'en' ? 'FR, afficher en français' : 'EN, view in English');
@@ -337,6 +371,34 @@
       }, 1100);
     }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(intro); else intro();
+
+    // Rotate the role line forever. Pauses while the bio is hovered or
+    // focused (so the Upgrade link stays clickable); off for reduced motion.
+    var timer;
+    function show(i) {
+      var items = roleEl.children;
+      items[current].classList.remove('on');
+      items[current].classList.add('off');
+      items[current].inert = true;
+      current = i;
+      items[i].classList.remove('off');
+      items[i].classList.add('on');
+      items[i].inert = false;
+    }
+    function schedule() {
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        show((current + 1) % roles.length);
+        schedule();
+      }, roles[current].ms);
+    }
+    if (!reduceMotion) {
+      schedule();
+      bio.addEventListener('mouseenter', function () { clearTimeout(timer); });
+      bio.addEventListener('focusin', function () { clearTimeout(timer); });
+      bio.addEventListener('mouseleave', schedule);
+      bio.addEventListener('focusout', schedule);
+    }
   })();
 </script>
 </body>
