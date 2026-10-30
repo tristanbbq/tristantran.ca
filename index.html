@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tristan Tran</title>
+<script>document.documentElement.className = 'js';</script>
+<meta name="description" content="Tristan Tran — Principal Software Developer at Upgrade. Based in Montreal, Canada.">
+<meta property="og:title" content="Tristan Tran">
+<meta property="og:description" content="Principal Software Developer at Upgrade. Based in Montreal, Canada.">
+<meta property="og:url" content="https://tristantran.ca">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#F2F3F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14171A" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://tristantran.ca">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1F23'/%3E%3Cpath d='M18 20h28M32 20v26' stroke='%23F2F3F1' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F2F3F1;
+    --ink: #1B1F23;
+    --muted: #686F76;
+    --rule: #D3D7D4;
+    --accent: #2F4E6F;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171A;
+      --ink: #E8EAE7;
+      --muted: #8E959C;
+      --rule: #2A2F34;
+      --accent: #9DB8D6;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: clamp(1.25rem, 4vw, 3rem);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .lang {
+    background: none;
+    border: 0;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .lang:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+  main {
+    align-self: end;
+    padding-bottom: clamp(2.5rem, 8vh, 6rem);
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: clamp(3.25rem, 12vw, 9.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    margin-left: -0.04em;
+  }
+
+  .line { display: block; }
+  .l1 { overflow: hidden; }
+  .l1 .word { display: inline-block; }
+  .ch { display: inline-block; }
+  .js .l2 .ch { opacity: 0; }
+
+  .bio {
+    margin-top: clamp(1.75rem, 4vh, 2.75rem);
+    font-size: clamp(1.125rem, 1.9vw, 1.375rem);
+    line-height: 1.45;
+    color: var(--ink);
+    animation: fade .9s 1.6s ease-out both;
+  }
+  .bio .role, .bio .soft { display: block; }
+  .bio .soft { color: var(--muted); }
+  @media (min-width: 640px) { .bio .role { white-space: nowrap; } }
+
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.25rem;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    animation: fade .9s 1.8s ease-out both;
+  }
+
+  a.link {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    padding-bottom: 2px;
+    transition: background-size .3s ease, color .2s;
+  }
+  a.link:hover { color: var(--accent); background-size: 100% 2px; }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+
+  .where { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  @media (max-width: 520px) {
+    footer { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  }
+
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <span>tristantran.ca</span>
+    <button class="lang" id="lang" type="button" aria-label="Afficher en français">FR</button>
+  </header>
+
+  <main>
+    <h1 aria-label="Tristan Tran">
+      <span class="line l1" aria-hidden="true"><span class="word"><span class="ch">T</span><span class="ch">r</span><span class="ch">i</span><span class="ch">s</span><span class="ch">t</span><span class="ch">a</span><span class="ch">n</span></span></span>
+      <span class="line l2" aria-hidden="true"><span class="ch">T</span><span class="ch">r</span><span class="ch">a</span><span class="ch">n</span></span>
+    </h1>
+    <p class="bio" data-en="<span class='role'>Principal Software {role} at Upgrade.</span> <span class='soft'>Based in Montreal 🇨🇦</span>"
+                   data-fr="<span class='role'>{role} logiciel principal chez Upgrade.</span> <span class='soft'>Basé à Montréal 🇨🇦</span>">
+      <span class="role">Principal Software Developer at Upgrade.</span> <span class="soft">Based in Montreal 🇨🇦</span>
+    </p>
+  </main>
+
+  <footer>
+    <nav class="links" aria-label="Links">
+      <a class="link" href="https://www.linkedin.com/in/tristantran89/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="link" href="https://github.com/tristanbbq" target="_blank" rel="noopener">GitHub</a>
+      <a class="link" id="email" href="mailto:hello@tristantran.ca">Email</a>
+    </nav>
+    <span class="where"><span id="city">Montreal</span> <span id="clock"></span></span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var bio = document.querySelector('.bio');
+    var btn = document.getElementById('lang');
+    var lang = 'en';
+    try {
+      var saved = localStorage.getItem('lang');
+      if (saved === 'fr' || saved === 'en') lang = saved;
+      else if ((navigator.language || '').toLowerCase().indexOf('fr') === 0) lang = 'fr';
+    } catch (e) {}
+
+    // English job title depends on visitor location: "Engineer" is a regulated
+    // title in Quebec, so default to "Developer" and switch only when the IP
+    // lookup confirms the visitor is outside Quebec. French is always
+    // "Développeur". Test with ?loc=qc or ?loc=other.
+    var titles = {
+      dev: { en: 'Developer', fr: 'Développeur' },
+      eng: { en: 'Engineer', fr: 'Développeur' }
+    };
+    var title = 'dev';
+
+    function apply(l) {
+      lang = l;
+      document.documentElement.lang = l;
+      bio.innerHTML = bio.getAttribute('data-' + l).replace('{role}', titles[title][l]);
+      document.getElementById('city').textContent = l === 'fr' ? 'Montréal' : 'Montreal';
+      btn.textContent = l === 'en' ? 'FR' : 'EN';
+      btn.setAttribute('aria-label', l === 'en' ? 'Afficher en français' : 'View in English');
+      try { localStorage.setItem('lang', l); } catch (e) {}
+    }
+    btn.addEventListener('click', function () { apply(lang === 'en' ? 'fr' : 'en'); });
+    apply(lang);
+
+    function setTitle(inQuebec) {
+      var t = inQuebec ? 'dev' : 'eng';
+      if (t !== title) { title = t; apply(lang); }
+    }
+    var forced = (location.search.match(/[?&]loc=(qc|other)\b/) || [])[1];
+    if (forced) {
+      setTitle(forced === 'qc');
+    } else {
+      var cached = null;
+      try { cached = sessionStorage.getItem('inQuebec'); } catch (e) {}
+      if (cached !== null) {
+        setTitle(cached === '1');
+      } else if (window.fetch) {
+        fetch('https://get.geojs.io/v1/ip/geo.json')
+          .then(function (r) { return r.json(); })
+          .then(function (g) {
+            var region = (g.region || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+            var inQuebec = g.country_code === 'CA' && region === 'quebec';
+            try { sessionStorage.setItem('inQuebec', inQuebec ? '1' : '0'); } catch (e) {}
+            setTitle(inQuebec);
+          })
+          .catch(function () {});
+      }
+    }
+
+    var clock = document.getElementById('clock');
+    function tick() {
+      try {
+        clock.textContent = new Intl.DateTimeFormat(lang === 'fr' ? 'fr-CA' : 'en-CA', {
+          hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/Toronto'
+        }).format(new Date());
+      } catch (e) { clock.textContent = ''; }
+    }
+    tick();
+    setInterval(tick, 15000);
+
+    // Name intro: "Tristan" rises in, then copies of its T, r, a, n
+    // glide down to spell "Tran" on the second line.
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var nameH1 = document.querySelector('h1');
+    function intro() {
+      var word = nameH1.querySelector('.l1 .word');
+      var src = nameH1.querySelectorAll('.l1 .ch');
+      var dst = nameH1.querySelectorAll('.l2 .ch');
+      var pick = [0, 1, 5, 6]; // T, r, a, n inside "Tristan"
+      if (reduceMotion || !word.animate) {
+        for (var i = 0; i < dst.length; i++) dst[i].style.opacity = '1';
+        return;
+      }
+      word.animate(
+        [{ transform: 'translateY(105%)' }, { transform: 'none' }],
+        { duration: 1000, easing: 'cubic-bezier(.2,.7,.1,1)', fill: 'both' }
+      );
+      setTimeout(function () {
+        pick.forEach(function (si, k) {
+          var a = src[si].getBoundingClientRect();
+          var b = dst[k].getBoundingClientRect();
+          dst[k].animate(
+            [
+              { transform: 'translate(' + (a.left - b.left) + 'px,' + (a.top - b.top) + 'px)', opacity: 0 },
+              { opacity: 0.7, offset: 0.4 },
+              { transform: 'none', opacity: 1 }
+            ],
+            { duration: 900, delay: k * 80, easing: 'cubic-bezier(.3,.7,.1,1)', fill: 'both' }
+          );
+        });
+      }, 1100);
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(intro); else intro();
+  })();
+</script>
+</body>
+</html>

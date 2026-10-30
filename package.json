@@ -1,0 +1,12 @@
+{
+  "name": "tristantran.ca",
+  "private": true,
+  "description": "Personal site for Tristan Tran",
+  "scripts": {
+    "build": "mkdir -p _site && html-minifier-terser --collapse-whitespace --conservative-collapse --remove-comments --remove-redundant-attributes --minify-css true --minify-js true -o _site/index.html index.html && cp CNAME _site/",
+    "serve": "npm run build && npx -y serve@14.2.4 _site"
+  },
+  "devDependencies": {
+    "html-minifier-terser": "7.2.0"
+  }
+}
