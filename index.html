@@ -263,7 +263,7 @@
       btn.setAttribute('aria-label', l === 'en' ? 'FR, afficher en français' : 'EN, view in English');
       try { localStorage.setItem('lang', l); } catch (e) {}
     }
-    btn.addEventListener('click', function () { apply(lang === 'en' ? 'fr' : 'en'); });
+    btn.addEventListener('click', function () { apply(lang === 'en' ? 'fr' : 'en'); tick(); });
     apply(lang);
 
     function setTitle(inQuebec) {
@@ -294,8 +294,10 @@
     var clock = document.getElementById('clock');
     function tick() {
       try {
-        clock.textContent = new Intl.DateTimeFormat(lang === 'fr' ? 'fr-CA' : 'en-CA', {
-          hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/Toronto'
+        // English: "11:38 PM"; French (Quebec): "23 h 38".
+        clock.textContent = new Intl.DateTimeFormat(lang === 'fr' ? 'fr-CA' : 'en-US', {
+          hour: lang === 'fr' ? '2-digit' : 'numeric', minute: '2-digit',
+          hour12: lang !== 'fr', timeZone: 'America/Toronto'
         }).format(new Date());
       } catch (e) { clock.textContent = ''; }
     }
