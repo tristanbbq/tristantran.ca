@@ -20,7 +20,7 @@
 <meta name="theme-color" content="#F2F3F1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#14171A" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://tristantran.ca">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B1F23'/%3E%3Cpath d='M18 20h28M32 20v26' stroke='%23F2F3F1' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
@@ -193,7 +193,7 @@
 <div class="page">
   <header>
     <span>tristantran.ca</span>
-    <button class="lang" id="lang" type="button" aria-label="Afficher en français">FR</button>
+    <button class="lang" id="lang" type="button" aria-label="FR, afficher en français">FR</button>
   </header>
 
   <main>
@@ -244,7 +244,7 @@
       bio.innerHTML = bio.getAttribute('data-' + l).replace('{role}', titles[title][l]);
       document.getElementById('city').textContent = l === 'fr' ? 'Montréal' : 'Montreal';
       btn.textContent = l === 'en' ? 'FR' : 'EN';
-      btn.setAttribute('aria-label', l === 'en' ? 'Afficher en français' : 'View in English');
+      btn.setAttribute('aria-label', l === 'en' ? 'FR, afficher en français' : 'EN, view in English');
       try { localStorage.setItem('lang', l); } catch (e) {}
     }
     btn.addEventListener('click', function () { apply(lang === 'en' ? 'fr' : 'en'); });
