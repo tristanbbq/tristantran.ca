@@ -3,7 +3,8 @@
   "private": true,
   "description": "Personal site for Tristan Tran",
   "scripts": {
-    "build": "mkdir -p _site && html-minifier-terser --collapse-whitespace --conservative-collapse --remove-comments --remove-redundant-attributes --minify-css true --minify-js true -o _site/index.html index.html && cp CNAME _site/",
+    "build": "mkdir -p _site && html-minifier-terser --collapse-whitespace --conservative-collapse --remove-comments --remove-redundant-attributes --minify-css true --minify-js true -o _site/index.html index.html && cp CNAME og.png _site/",
+    "og": "\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless=new --hide-scrollbars --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=5000 --screenshot=\"$PWD/og.png\" \"file://$PWD/tools/og.html\"",
     "serve": "npm run build && npx -y serve@14.2.4 _site"
   },
   "devDependencies": {
