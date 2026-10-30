@@ -111,6 +111,13 @@
   .bio .role, .bio .soft { display: block; }
   .bio .soft { color: var(--muted); }
   @media (min-width: 640px) { .bio .role { white-space: nowrap; } }
+  .bio a.co {
+    color: inherit;
+    text-decoration: underline 1px var(--rule);
+    text-underline-offset: 0.2em;
+    transition: color .2s, text-decoration-color .2s;
+  }
+  .bio a.co:hover { color: var(--accent); text-decoration-color: currentColor; }
 
   footer {
     display: flex;
@@ -170,9 +177,9 @@
       <span class="line l1" aria-hidden="true"><span class="word"><span class="ch">T</span><span class="ch">r</span><span class="ch">i</span><span class="ch">s</span><span class="ch">t</span><span class="ch">a</span><span class="ch">n</span></span></span>
       <span class="line l2" aria-hidden="true"><span class="ch">T</span><span class="ch">r</span><span class="ch">a</span><span class="ch">n</span></span>
     </h1>
-    <p class="bio" data-en="<span class='role'>Principal Software {role} at Upgrade.</span> <span class='soft'>Based in Montreal 🇨🇦</span>"
-                   data-fr="<span class='role'>{role} logiciel principal chez Upgrade.</span> <span class='soft'>Basé à Montréal 🇨🇦</span>">
-      <span class="role">Principal Software Developer at Upgrade.</span> <span class="soft">Based in Montreal 🇨🇦</span>
+    <p class="bio" data-en="<span class='role'>Principal Software {role} at <a class='co' href='https://www.upgrade.com' target='_blank' rel='noopener'>Upgrade</a>.</span> <span class='soft'>Based in Montreal 🇨🇦</span>"
+                   data-fr="<span class='role'>{role} logiciel principal chez <a class='co' href='https://www.upgrade.com' target='_blank' rel='noopener'>Upgrade</a>.</span> <span class='soft'>Basé à Montréal 🇨🇦</span>">
+      <span class="role">Principal Software Developer at <a class="co" href="https://www.upgrade.com" target="_blank" rel="noopener">Upgrade</a>.</span> <span class="soft">Based in Montreal 🇨🇦</span>
     </p>
   </main>
 
